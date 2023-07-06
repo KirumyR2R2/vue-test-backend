@@ -1,0 +1,319 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Набор полей для создания задачи"""
+input CreateTaskInput {
+  """Тело задачи"""
+  taskBody: String!
+
+  """Статус задачи"""
+  taskStatus: TaskStatus!
+
+  """Оглавление задачи"""
+  taskTitle: String!
+
+  """ID пользователя, которому принадлежит задача"""
+  taskUserId: Int!
+
+  """Сроки задачи начальная дата"""
+  task_from: DateTime!
+
+  """Сроки задачи конечная дата"""
+  task_to: DateTime!
+}
+
+"""Результат операции создания задачи"""
+type CreateTaskOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Созданная задача"""
+  task: Task
+}
+
+"""Набор полей для создания пользователя"""
+input CreateUserInput {
+  """Имя пользователя в системе"""
+  username: String!
+}
+
+"""Результат операции создания пользователя"""
+type CreateUserOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Созданная пользователя"""
+  user: User
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Набор полей для вывода всех задач пользователя"""
+input FindAllTasksInput {
+  """Строка поиска по вхождению ключевых слов"""
+  keyword: String
+
+  """ID Пользователя, по которому фильтруются задачи"""
+  userId: Int
+}
+
+"""Список задач"""
+type FindAllTasksOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Список задач"""
+  tasks: [Task!]
+}
+
+"""Набор полей для вывода всех пользователей"""
+input FindAllUsersInput {
+  """Строка поиска по вхождению ключевых слов"""
+  keyword: String
+}
+
+"""Список пользователей"""
+type FindAllUsersOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Список пользователей"""
+  users: [User!]
+}
+
+"""Набор полей для вывода задачи"""
+input FindTaskInput {
+  """ID задачи"""
+  id: Int!
+}
+
+"""Результат поиска задачи"""
+type FindTaskOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Найденная задача"""
+  task: Task
+}
+
+type Mutation {
+  """Создание новой задачи"""
+  createTask(
+    """Набор полей для создания задачи"""
+    input: CreateTaskInput!
+  ): CreateTaskOutput!
+
+  """Создание нового пользователя"""
+  createUser(
+    """Набор полей для создания пользователя"""
+    input: CreateUserInput!
+  ): CreateUserOutput!
+
+  """Удаление задачи"""
+  removeTask(
+    """Набор полей для удаления задачи"""
+    input: RemoveTaskInput!
+  ): RemoveTaskOutput!
+
+  """Удаление пользователя"""
+  removeUser(
+    """Набор полей для удаления пользователя"""
+    input: RemoveUserInput!
+  ): RemoveUserOutput!
+
+  """Редактирование задачи"""
+  updateTask(
+    """Набор полей для редактирования задачи"""
+    input: UpdateTaskInput!
+  ): UpdateTaskOutput!
+
+  """Редактирование пользователя"""
+  updateUser(
+    """Набор полей для редактирования пользователя"""
+    input: UpdateUserInput!
+  ): UpdateUserOutput!
+}
+
+type Query {
+  """Получение списка задач пользователя"""
+  findAllTasks(
+    """Набор полей для вывода списка задач пользователя"""
+    input: FindAllTasksInput!
+  ): FindAllTasksOutput!
+
+  """Получение списка пользователей"""
+  findAllUsers(
+    """Набор полей для вывода списка пользователей"""
+    input: FindAllUsersInput!
+  ): FindAllUsersOutput!
+
+  """Получение задачи"""
+  findOneTask(
+    """Набор полей для вывода задачи"""
+    input: FindTaskInput!
+  ): FindTaskOutput!
+}
+
+"""Набор полей для удаления задачи"""
+input RemoveTaskInput {
+  """Идентификатор записи в базе данных"""
+  id: Int!
+}
+
+"""Результат операции удаления задачи"""
+type RemoveTaskOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+}
+
+"""Набор полей для удаления пользователя"""
+input RemoveUserInput {
+  """Идентификатор записи в базе данных"""
+  id: Int!
+}
+
+"""Результат операции удаления пользователя"""
+type RemoveUserOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+}
+
+"""Объект задачи"""
+type Task {
+  """Дата создания записи в базе данных"""
+  created_at: DateTime!
+
+  """Идентификатор записи в базе данных"""
+  id: Int!
+
+  """Тело задачи"""
+  taskBody: String!
+
+  """Статус задачи"""
+  taskStatus: TaskStatus!
+
+  """Оглавление задачи"""
+  taskTitle: String!
+
+  """Отвественный пользователь"""
+  taskUser: User
+
+  """ID пользователя, которому принадлежит задача"""
+  taskUserId: Int!
+
+  """Сроки задачи начальная дата"""
+  task_from: DateTime!
+
+  """Сроки задачи конечная дата"""
+  task_to: DateTime!
+
+  """Дата обновления записи в базе данных"""
+  updated_at: DateTime!
+}
+
+"""Статус задачи"""
+enum TaskStatus {
+  Complete
+  Pending
+  Processing
+}
+
+"""Набор полей для редактирования задачи"""
+input UpdateTaskInput {
+  """Идентификатор записи в базе данных"""
+  id: Int!
+
+  """Тело задачи"""
+  taskBody: String
+
+  """Статус задачи"""
+  taskStatus: TaskStatus
+
+  """Оглавление задачи"""
+  taskTitle: String
+
+  """ID пользователя, которому принадлежит задача"""
+  taskUserId: Int
+
+  """Сроки задачи начальная дата"""
+  task_from: DateTime
+
+  """Сроки задачи конечная дата"""
+  task_to: DateTime
+}
+
+"""Результат редактирования задачи"""
+type UpdateTaskOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Отредактированная задача"""
+  task: Task
+}
+
+"""Набор полей для редактирования пользователя"""
+input UpdateUserInput {
+  """Идентификатор записи в базе данных"""
+  id: Int!
+
+  """Имя пользователя в системе"""
+  username: String
+}
+
+"""Результат редактирования пользователоя"""
+type UpdateUserOutput {
+  """Описание ошибки"""
+  error: String
+
+  """Статус операции"""
+  ok: Boolean!
+
+  """Отредактированный пользователь"""
+  user: User
+}
+
+"""Объект пользователя"""
+type User {
+  """Дата создания записи в базе данных"""
+  created_at: DateTime!
+
+  """Идентификатор записи в базе данных"""
+  id: Int!
+
+  """Задачи пользователя"""
+  tasks: [Task!]
+
+  """Дата обновления записи в базе данных"""
+  updated_at: DateTime!
+
+  """Имя пользователя в системе"""
+  username: String!
+}
